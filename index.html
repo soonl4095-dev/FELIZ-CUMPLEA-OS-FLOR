@@ -886,7 +886,7 @@ h1{margin:0;font-family:var(--font-display);font-weight:400;line-height:.9}
   size();
   window.addEventListener('resize', size);
   function burst(x, y, n, o) {
-    if (RM || !n) { return; }
+    if (!n) { return; }
     o = o || {};
     var angle = o.angle !== undefined ? o.angle : -Math.PI / 2;
     var spread = o.spread !== undefined ? o.spread : Math.PI * 2;
@@ -899,7 +899,6 @@ h1{margin:0;font-family:var(--font-display);font-weight:400;line-height:.9}
     if (!raf) { raf = requestAnimationFrame(tick); }
   }
   function rain(n) {
-    if (RM) { return; }
     for (var i = 0; i < n && parts.length < 700; i++) {
       parts.push({ x: Math.random() * W, y: -20 - Math.random() * 200, vx: (Math.random() - 0.5) * 1.5, vy: 1 + Math.random() * 3, w: 6 + Math.random() * 7, h: 4 + Math.random() * 6, rot: Math.random() * 6.28, vr: (Math.random() - 0.5) * 0.25, c: COLORS[(Math.random() * COLORS.length) | 0], shape: (Math.random() * 3) | 0 });
     }
@@ -1278,7 +1277,7 @@ h1{margin:0;font-family:var(--font-display);font-weight:400;line-height:.9}
   })();
 
   /* ---------- Bienvenida ---------- */
-  setTimeout(function () { rain(55); burst(W / 2, H * 0.35, 40, { angle: -Math.PI / 2, spread: Math.PI, speed: [5, 11] }); }, 1100);
+  if (!RM) { setTimeout(function () { rain(55); burst(W / 2, H * 0.35, 40, { angle: -Math.PI / 2, spread: Math.PI, speed: [5, 11] }); }, 1100); }
 })();
 </script>
 
